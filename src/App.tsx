@@ -5,6 +5,8 @@ import type { Page } from './components/Sidebar';
 import { UploadArea } from './components/UploadArea';
 import { ConfidenceMeter } from './components/ConfidenceMeter';
 import { HistoryEntry } from './components/HistoryEntry';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 
 function App() {
   const [page, setPage] = useState<Page>('landing');
@@ -67,120 +69,126 @@ function App() {
       <div className="animated-bg" id="animatedBg" />
       <Sidebar current={page} setPage={setPage} />
 
-      <main className="main-content">
-        {page === 'landing' && (
-          <div className="page active" id="landing">
-            <div className="landing">
-              <h1 className="logo glow-text">ALETHIA AI</h1>
-              <p className="tagline">Verifying Digital Truth</p>
-              <button className="cta-button" onClick={() => setPage('upload')}>
-                Upload & Detect
-              </button>
-            </div>
-          </div>
-        )}
+      <div className="page-layout">
+        <Header />
 
-        {page === 'upload' && (
-          <div className="page active" id="upload">
-            <UploadArea onFileSelected={handleFile} />
-            {showProgress && (
-              <div className="progress-container">
-                <div
-                  className="progress-bar"
-                  style={{ width: `${Math.min(uploadProgress, 100)}%` }}
-                ></div>
+        <main className="main-content">
+          {page === 'landing' && (
+            <div className="page active" id="landing">
+              <div className="landing">
+                <h1 className="logo glow-text">ALETHIA AI</h1>
+                <p className="tagline">Verifying Digital Truth</p>
+                <button className="cta-button" onClick={() => setPage('upload')}>
+                  Upload & Detect
+                </button>
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
 
-        {page === 'analysis' && (
-          <div className="page active" id="analysis">
-            <h2 className="glow-text" style={{ marginBottom: 40, fontSize: '2.5rem' }}>
-              Analysis Results
-            </h2>
+          {page === 'upload' && (
+            <div className="page active" id="upload">
+              <UploadArea onFileSelected={handleFile} />
+              {showProgress && (
+                <div className="progress-container">
+                  <div
+                    className="progress-bar"
+                    style={{ width: `${Math.min(uploadProgress, 100)}%` }}
+                  ></div>
+                </div>
+              )}
+            </div>
+          )}
 
-            <ConfidenceMeter score={confidence} />
+          {page === 'analysis' && (
+            <div className="page active" id="analysis">
+              <h2 className="glow-text" style={{ marginBottom: 40, fontSize: '2.5rem' }}>
+                Analysis Results
+              </h2>
 
-            <div className="analysis-container">
-              <div className="result-card real" id="resultCard">
-                <h3>Authenticity Status</h3>
-                <div style={{ margin: '20px 0' }}>
-                  <div style={{ fontSize: '1.5rem', color: '#44FF44', fontWeight: 600 }}>
-                    AUTHENTIC
+              <ConfidenceMeter score={confidence} />
+
+              <div className="analysis-container">
+                <div className="result-card real" id="resultCard">
+                  <h3>Authenticity Status</h3>
+                  <div style={{ margin: '20px 0' }}>
+                    <div style={{ fontSize: '1.5rem', color: '#44FF44', fontWeight: 600 }}>
+                      AUTHENTIC
+                    </div>
+                    <div style={{ color: '#888', marginTop: 10 }}>
+                      Real: 92% | Fake: 8%
+                    </div>
                   </div>
-                  <div style={{ color: '#888', marginTop: 10 }}>
-                    Real: 92% | Fake: 8%
+                  <div className="status-badge status-real">Verified Authentic</div>
+                </div>
+
+                <div className="result-card">
+                  <h3>Detection Details</h3>
+                  <div style={{ margin: '20px 0' }}>
+                    <p>
+                      <strong>Analysis Method:</strong> Deep Neural Network
+                    </p>
+                    <p>
+                      <strong>Processing Time:</strong> 2.3 seconds
+                    </p>
+                    <p>
+                      <strong>File Type:</strong> JPEG Image
+                    </p>
+                    <p>
+                      <strong>Resolution:</strong> 1920x1080
+                    </p>
                   </div>
                 </div>
-                <div className="status-badge status-real">Verified Authentic</div>
               </div>
 
-              <div className="result-card">
-                <h3>Detection Details</h3>
-                <div style={{ margin: '20px 0' }}>
-                  <p>
-                    <strong>Analysis Method:</strong> Deep Neural Network
-                  </p>
-                  <p>
-                    <strong>Processing Time:</strong> 2.3 seconds
-                  </p>
-                  <p>
-                    <strong>File Type:</strong> JPEG Image
-                  </p>
-                  <p>
-                    <strong>Resolution:</strong> 1920x1080
-                  </p>
+              <div className="comparison-container">
+                <div className="image-container">
+                  <h4>Original Media</h4>
+                  <div
+                    className="preview-image"
+                    style={{
+                      height: 200,
+                      background: 'var(--light-grey)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    Original Image
+                  </div>
+                </div>
+                <div className="image-container">
+                  <h4>Analysis Heatmap</h4>
+                  <div
+                    className="preview-image"
+                    style={{
+                      height: 200,
+                      background: 'var(--light-grey)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    Heatmap Overlay
+                  </div>
                 </div>
               </div>
             </div>
+          )}
 
-            <div className="comparison-container">
-              <div className="image-container">
-                <h4>Original Media</h4>
-                <div
-                  className="preview-image"
-                  style={{
-                    height: 200,
-                    background: 'var(--light-grey)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  Original Image
-                </div>
-              </div>
-              <div className="image-container">
-                <h4>Analysis Heatmap</h4>
-                <div
-                  className="preview-image"
-                  style={{
-                    height: 200,
-                    background: 'var(--light-grey)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  Heatmap Overlay
-                </div>
-              </div>
+          {page === 'history' && (
+            <div className="page active" id="history">
+              <h2 className="glow-text" style={{ marginBottom: 40, fontSize: '2.5rem' }}>
+                Analysis History
+              </h2>
+              <HistoryEntry name="sample_image.jpg" uploaded="2 hours ago" status="real" confidence={92} />
+              <HistoryEntry name="video_clip.mp4" uploaded="1 day ago" status="fake" confidence={78} />
+              <HistoryEntry name="portrait.png" uploaded="3 days ago" status="real" confidence={95} />
             </div>
-          </div>
-        )}
+          )}
+        </main>
 
-        {page === 'history' && (
-          <div className="page active" id="history">
-            <h2 className="glow-text" style={{ marginBottom: 40, fontSize: '2.5rem' }}>
-              Analysis History
-            </h2>
-            <HistoryEntry name="sample_image.jpg" uploaded="2 hours ago" status="real" confidence={92} />
-            <HistoryEntry name="video_clip.mp4" uploaded="1 day ago" status="fake" confidence={78} />
-            <HistoryEntry name="portrait.png" uploaded="3 days ago" status="real" confidence={95} />
-          </div>
-        )}
-      </main>
+        <Footer />
+      </div>
     </>
   );
 }

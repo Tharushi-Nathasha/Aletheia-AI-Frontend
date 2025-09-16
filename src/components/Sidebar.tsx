@@ -30,6 +30,13 @@ export const Sidebar = ({
   setPage: (p: Page) => void;
 }) => (
   <nav className="sidebar">
+    {/* Logo section */}
+    <div className="sidebar-logo">
+      <img src="src/assets/logo.png" alt="App Logo" className="logo-img" />
+      {/* <h2 className="logo-text">Alethia</h2> */}
+    </div>
+
+    {/* Navigation items */}
     <NavItem label="Dashboard" page="landing" current={current} onClick={setPage}>
       <svg className="nav-icon" viewBox="0 0 24 24">
         <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
