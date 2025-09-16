@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -68,7 +68,3 @@ export default tseslint.config([
   },
 ])
 ```
-=======
-# Aletheia-AI-Frontend
-Frontend for Aletheia AI, built with React and TypeScript. Provides a clean, responsive web interface for users to upload and analyze videos/images for deepfake detection.
->>>>>>> c76a1db54ea90383ac5349db85fdcb6f8d9922d8
