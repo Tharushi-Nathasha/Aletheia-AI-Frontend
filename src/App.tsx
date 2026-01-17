@@ -221,77 +221,76 @@ function App() {
 
           {page === 'about' && (
             <div className="page active" id="about">
-              <div className="content-page">
-                <h2 className="glow-text" style={{ marginBottom: 40, fontSize: '2.5rem' }}>
-                  About Alethia AI
-                </h2>
+              <h2 className="glow-text" style={{ marginBottom: 60, fontSize: '2.5rem' }}>
+                About Alethia AI
+              </h2>
 
-                <div className="about-hero">
-                  <div className="about-icon">
+              <div className="about-hero">
+                <div className="about-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <p className="about-intro">
+                  Alethia AI leverages advanced deep learning algorithms to detect manipulated media 
+                  with industry-leading accuracy. Our platform provides reliable, fast, and accessible 
+                  verification tools for the digital age.
+                </p>
+              </div>
+
+              <div className="about-grid">
+                <div className="about-card">
+                  <div className="about-card-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                      <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <p className="about-intro">
-                    Alethia AI is a cutting-edge deepfake detection platform powered by advanced neural networks 
-                    and machine learning algorithms to verify the authenticity of digital media.
+                  <h3>Our Mission</h3>
+                  <p>
+                    Combat digital misinformation by providing accessible and accurate 
+                    deepfake detection technology for everyone.
                   </p>
                 </div>
 
-                <div className="about-grid">
-                  <div className="about-card">
-                    <div className="about-card-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <h3>Our Mission</h3>
-                    <p>
-                      To combat digital misinformation by providing accessible, accurate, and reliable 
-                      deepfake detection tools for everyone.
-                    </p>
+                <div className="about-card">
+                  <div className="about-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
                   </div>
-
-                  <div className="about-card">
-                    <div className="about-card-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                      </svg>
-                    </div>
-                    <h3>Privacy First</h3>
-                    <p>
-                      Your uploaded media is processed securely and never stored permanently. 
-                      We prioritize your privacy and data security.
-                    </p>
-                  </div>
-
-                  <div className="about-card">
-                    <div className="about-card-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                    </div>
-                    <h3>Trusted Technology</h3>
-                    <p>
-                      Our AI models are trained on millions of samples and continuously updated 
-                      to detect the latest deepfake techniques.
-                    </p>
-                  </div>
+                  <h3>Privacy First</h3>
+                  <p>
+                    Your data is processed securely and never stored. We prioritize 
+                    user privacy and implement strict data protection protocols.
+                  </p>
                 </div>
 
-                <div className="about-stats">
-                  <div className="stat-item">
-                    <div className="stat-number">99.2%</div>
-                    <div className="stat-label">Accuracy Rate</div>
+                <div className="about-card">
+                  <div className="about-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
                   </div>
-                  <div className="stat-item">
-                    <div className="stat-number">2.5s</div>
-                    <div className="stat-label">Avg. Processing Time</div>
-                  </div>
-                  <div className="stat-item">
-                    <div className="stat-number">500K+</div>
-                    <div className="stat-label">Files Analyzed</div>
-                  </div>
+                  <h3>Trusted Technology</h3>
+                  <p>
+                    Our models are continuously trained on millions of samples and 
+                    updated to detect the latest manipulation techniques.
+                  </p>
+                </div>
+              </div>
+
+              <div className="about-stats">
+                <div className="stat-item">
+                  <div className="stat-number">99.2%</div>
+                  <div className="stat-label">Accuracy</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-number">2.5s</div>
+                  <div className="stat-label">Processing</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-number">500K+</div>
+                  <div className="stat-label">Analyzed</div>
                 </div>
               </div>
             </div>
