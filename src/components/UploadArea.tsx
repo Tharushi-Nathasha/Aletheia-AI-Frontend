@@ -24,10 +24,7 @@ export const UploadArea = ({
   };
 
   return (
-    <div>
-      <h2 className="glow-text" style={{ marginBottom: 40, fontSize: '2.5rem' }}>
-        Upload Media for Analysis
-      </h2>
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div
         className={`upload-area ${dragOver ? 'dragover' : ''}`}
         onClick={() => inputRef.current?.click()}
