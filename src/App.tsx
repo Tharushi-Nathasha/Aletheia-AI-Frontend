@@ -1,11 +1,12 @@
 // src/App.tsx
 import { useEffect, useState } from 'react';
 import { Sidebar } from './components/Sidebar';
-import type { Page } from './components/Sidebar';
+import type { Page } from './components/Header';
 import { UploadArea } from './components/UploadArea';
 import { ConfidenceMeter } from './components/ConfidenceMeter';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { AuthPages } from './components/AuthPages';
 
 function App() {
   const [page, setPage] = useState<Page>('landing');
@@ -32,7 +33,7 @@ function App() {
   useEffect(() => {
     const bg = document.getElementById('animatedBg');
     if (bg) {
-      bg.innerHTML = ''; // Clear existing particles
+      bg.innerHTML = '';
       for (let i = 0; i < 50; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -63,6 +64,11 @@ function App() {
       });
     }, 200);
   };
+
+  // If auth page is active, show only auth (no sidebar, header, footer)
+  if (page === 'auth') {
+    return <AuthPages onLoginSuccess={() => setPage('landing')} />;
+  }
 
   return (
     <>
@@ -112,7 +118,6 @@ function App() {
 
               <ConfidenceMeter score={confidence} />
 
-              {/* Main Result Card */}
               <div className="main-result-card">
                 <div className="result-status-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -129,7 +134,6 @@ function App() {
                 <div className="status-badge status-real">✓ Verified Authentic</div>
               </div>
 
-              {/* Details Grid */}
               <div className="analysis-details-grid">
                 <div className="detail-card">
                   <div className="detail-icon">
@@ -172,7 +176,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Comparison Section */}
               <div className="comparison-section">
                 <h3 className="section-title">Visual Analysis</h3>
                 <div className="comparison-container">
@@ -201,7 +204,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Action Buttons */}
               <div className="analysis-actions">
                 <button className="action-button primary" onClick={() => setPage('upload')}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -307,14 +309,13 @@ function App() {
               </div>
 
               <div className="contact-container">
-                {/* Contact Form - Main Focus */}
                 <div className="contact-form-wrapper">
                   <div className="form-header">
                     <h3>Send us a message</h3>
                     <p>Fill out the form below and we'll get back to you within 24 hours.</p>
                   </div>
                   
-                  <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+                  <div className="contact-form">
                     <div className="form-row">
                       <div className="form-group">
                         <label htmlFor="name">Full Name</label>
@@ -336,16 +337,15 @@ function App() {
                       <textarea id="message" rows={6} placeholder="Tell us more about your inquiry..."></textarea>
                     </div>
                     
-                    <button type="submit" className="submit-button">
+                    <button type="button" className="submit-button">
                       <span>Send Message</span>
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                       </svg>
                     </button>
-                  </form>
+                  </div>
                 </div>
 
-                {/* Contact Info Cards */}
                 <div className="contact-info-grid">
                   <div className="info-card">
                     <div className="info-card-icon email">
