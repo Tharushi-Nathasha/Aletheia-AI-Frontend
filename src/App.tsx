@@ -298,74 +298,99 @@ function App() {
 
           {page === 'contact' && (
             <div className="page active" id="contact">
-              <div className="content-page">
-                <h2 className="glow-text" style={{ marginBottom: 40, fontSize: '2.5rem' }}>
-                  Contact Us
-                </h2>
+              <h2 className="glow-text" style={{ marginBottom: 60, fontSize: '2.5rem' }}>
+                Get In Touch
+              </h2>
 
-                <div className="contact-intro">
-                  <p>Have questions or feedback? We'd love to hear from you!</p>
+              <div className="contact-intro">
+                <p>Let's start a conversation. We're here to help and answer any questions you might have.</p>
+              </div>
+
+              <div className="contact-container">
+                {/* Contact Form - Main Focus */}
+                <div className="contact-form-wrapper">
+                  <div className="form-header">
+                    <h3>Send us a message</h3>
+                    <p>Fill out the form below and we'll get back to you within 24 hours.</p>
+                  </div>
+                  
+                  <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="name">Full Name</label>
+                        <input type="text" id="name" placeholder="John Doe" />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" />
+                      </div>
+                    </div>
+                    
+                    <div className="form-group">
+                      <label htmlFor="subject">Subject</label>
+                      <input type="text" id="subject" placeholder="How can we help you?" />
+                    </div>
+                    
+                    <div className="form-group">
+                      <label htmlFor="message">Message</label>
+                      <textarea id="message" rows={6} placeholder="Tell us more about your inquiry..."></textarea>
+                    </div>
+                    
+                    <button type="submit" className="submit-button">
+                      <span>Send Message</span>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </form>
                 </div>
 
-                <div className="contact-grid">
-                  <div className="contact-info">
-                    <div className="contact-card">
-                      <div className="contact-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                      <h3>Email</h3>
-                      <p>support@alethia-ai.com</p>
+                {/* Contact Info Cards */}
+                <div className="contact-info-grid">
+                  <div className="info-card">
+                    <div className="info-card-icon email">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
                     </div>
-
-                    <div className="contact-card">
-                      <div className="contact-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                          <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                      </div>
-                      <h3>Location</h3>
-                      <p>San Francisco, CA</p>
-                    </div>
-
-                    <div className="contact-card">
-                      <div className="contact-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                      <h3>Business Hours</h3>
-                      <p>Mon - Fri: 9AM - 6PM PST</p>
-                    </div>
+                    <h4>Email Us</h4>
+                    <p>support@alethia-ai.com</p>
+                    <span className="info-card-label">We reply within 24 hours</span>
                   </div>
 
-                  <div className="contact-form-container">
-                    <form className="contact-form">
-                      <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        <input type="text" id="name" placeholder="Your name" />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="email" id="email" placeholder="your@email.com" />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="subject">Subject</label>
-                        <input type="text" id="subject" placeholder="How can we help?" />
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="message">Message</label>
-                        <textarea id="message" rows={5} placeholder="Your message..."></textarea>
-                      </div>
-                      <button type="submit" className="submit-button">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                        </svg>
-                        Send Message
-                      </button>
-                    </form>
+                  <div className="info-card">
+                    <div className="info-card-icon location">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <h4>Visit Us</h4>
+                    <p>San Francisco, CA</p>
+                    <span className="info-card-label">United States</span>
+                  </div>
+
+                  <div className="info-card">
+                    <div className="info-card-icon time">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h4>Working Hours</h4>
+                    <p>Mon - Fri: 9AM - 6PM</p>
+                    <span className="info-card-label">Pacific Standard Time</span>
+                  </div>
+
+                  <div className="info-card social">
+                    <div className="info-card-icon social-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M17 2H7a5 5 0 00-5 5v10a5 5 0 005 5h10a5 5 0 005-5V7a5 5 0 00-5-5z" />
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" />
+                      </svg>
+                    </div>
+                    <h4>Follow Us</h4>
+                    <p>@alethia_ai</p>
+                    <span className="info-card-label">Stay updated on social media</span>
                   </div>
                 </div>
               </div>
