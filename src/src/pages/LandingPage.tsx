@@ -1,4 +1,3 @@
-import React from 'react';
 import { PageTransition } from '../components/PageTransition';
 import { HeroSection } from '../components/HeroSection';
 import { FeaturesSection } from '../components/FeaturesSection';

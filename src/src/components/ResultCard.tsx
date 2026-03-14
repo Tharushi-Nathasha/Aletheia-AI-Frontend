@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircleIcon, AlertTriangleIcon, ActivityIcon } from 'lucide-react';
 import { ConfidenceBar } from './ConfidenceBar';
