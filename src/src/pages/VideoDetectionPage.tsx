@@ -5,7 +5,7 @@ import { PageTransition } from '../components/PageTransition';
 import { UploadZone } from '../components/UploadZone';
 import { ResultCard } from '../components/ResultCard';
 import { useFileUpload } from '../hooks/useFileUpload';
-import { api, DetectionResult } from '../services/api';
+//import { api, DetectionResult } from '../services/api';
 export function VideoDetectionPage() {
   const { file, previewUrl, error, handleFileSelect, reset, setError } =
   useFileUpload({
