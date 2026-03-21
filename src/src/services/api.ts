@@ -3,6 +3,11 @@ export interface DetectionResult {
   prediction: 'REAL' | 'FAKE'
   confidence: number
   heatmap?: string
+  frames?: {
+    frame: number
+    score: number
+    heatmap: string
+  }[]
 }
 const API_BASE = "http://127.0.0.1:8000"
 
