@@ -18,9 +18,11 @@ export function ImageDetectionPage() {
 
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
+  // ✅ UPDATED RESULT STATE (added heatmap)
   const [result, setResult] = useState<{
-    prediction: string;
+    prediction: 'REAL' | 'FAKE';
     confidence: number;
+    heatmap?: string;
   } | null>(null);
 
   const handleAnalyze = async () => {
@@ -34,9 +36,11 @@ export function ImageDetectionPage() {
 
       const res = await detectImage(file);
 
+      // ✅ STORE HEATMAP ALSO
       setResult({
         prediction: res.prediction,
-        confidence: res.confidence
+        confidence: res.confidence,
+        heatmap: res.heatmap
       });
 
     } catch (err) {
@@ -175,6 +179,7 @@ export function ImageDetectionPage() {
                 prediction={result.prediction}
                 confidence={result.confidence}
                 type="image"
+                heatmap={result.heatmap} // ✅ THIS IS THE FINAL STEP
               />
 
             )}
