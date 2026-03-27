@@ -1,19 +1,12 @@
 import { motion } from 'framer-motion';
-import { CheckCircleIcon, AlertTriangleIcon, ActivityIcon } from 'lucide-react';
+import { CheckCircleIcon, AlertTriangleIcon } from 'lucide-react';
 import { ConfidenceBar } from './ConfidenceBar';
-import {
-  AreaChart,
-  Area,
-  ResponsiveContainer
-} from 'recharts';
 
 interface ResultCardProps {
   prediction: 'REAL' | 'FAKE';
   confidence: number;
   type: 'image' | 'video';
   heatmap?: string;
-
-  // 🔥 NEW FOR VIDEO
   frames?: {
     frame: number;
     score: number;
@@ -21,14 +14,24 @@ interface ResultCardProps {
   }[];
 }
 
-// Mock chart (you can replace later with real data)
-const mockChartData = Array.from({ length: 20 }, (_, i) => ({
-  frame: i * 5,
-  fakeProbability: Math.max(
-    0,
-    Math.min(100, 20 + Math.random() * 60 + Math.sin(i / 2) * 20)
-  )
-}));
+// Explanation function
+function getExplanation(prediction: 'REAL' | 'FAKE', confidence: number) {
+
+  if (prediction === 'FAKE') {
+    if (confidence > 0.9)
+      return "Strong manipulation detected. The AI found inconsistencies in facial regions.";
+
+    if (confidence > 0.75)
+      return "Possible manipulation detected with some irregular patterns.";
+
+    return "Uncertain result. Some unusual patterns were found.";
+  }
+
+  if (confidence > 0.9)
+    return "No manipulation detected. Content appears natural.";
+
+  return "Content appears real with minor variations.";
+}
 
 export function ResultCard({
   prediction,
@@ -42,164 +45,44 @@ export function ResultCard({
   const Icon = isFake ? AlertTriangleIcon : CheckCircleIcon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.5 }}
-      className={`glass rounded-2xl overflow-hidden border ${
-        isFake ? 'border-red-500/30 glow-red' : 'border-emerald-500/30 glow-emerald'
-      }`}
-    >
-      <div className="p-8">
+    <motion.div className="p-6 border rounded-xl bg-black text-white">
 
-        {/* HEADER */}
-        <div className="flex flex-col md:flex-row items-center gap-8">
+      {/* HEADER */}
+      <div className="flex items-center gap-6">
 
-          {/* RESULT BADGE */}
-          <div className="flex-shrink-0 flex flex-col items-center justify-center w-48 h-48 rounded-full border-4 relative">
-            
-            <div
-              className="absolute inset-0 rounded-full animate-pulse-glow"
-              style={{
-                backgroundColor: isFake
-                  ? 'rgba(248, 113, 113, 0.1)'
-                  : 'rgba(52, 211, 153, 0.1)'
-              }}
-            />
+        <Icon className={isFake ? "text-red-500" : "text-green-500"} />
 
-            <Icon className={`w-12 h-12 mb-2 ${
-              isFake ? 'text-red-500' : 'text-emerald-500'
-            }`} />
-
-            <span className={`text-4xl font-display font-bold ${
-              isFake ? 'text-red-500' : 'text-emerald-500'
-            }`}>
-              {prediction}
-            </span>
-
-            <span className="text-xs text-slate-400 mt-1 uppercase">
-              Prediction
-            </span>
-          </div>
-
-          {/* DETAILS */}
-          <div className="flex-1 w-full space-y-6">
-
-            <div>
-              <h3 className="text-2xl font-display font-bold text-white mb-2">
-                Analysis Complete
-              </h3>
-
-              <p className="text-slate-400">
-                {isFake
-                  ? 'AI detected strong manipulation patterns.'
-                  : 'No significant manipulation detected.'}
-              </p>
-            </div>
-
-            <ConfidenceBar score={confidence} />
-
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
-              <div className="bg-slate-900/50 rounded-xl p-4 border border-white/5">
-                <span className="block text-xs text-slate-500 mb-1">
-                  Model
-                </span>
-                <span className="text-sm text-slate-300">
-                  Aletheia Vision v2.4
-                </span>
-              </div>
-
-              <div className="bg-slate-900/50 rounded-xl p-4 border border-white/5">
-                <span className="block text-xs text-slate-500 mb-1">
-                  Scan Time
-                </span>
-                <span className="text-sm text-slate-300">
-                  {type === 'image' ? '2.4s' : '4.5s'}
-                </span>
-              </div>
-            </div>
-
-          </div>
+        <div>
+          <h2 className="text-2xl">{prediction}</h2>
+          <p>{getExplanation(prediction, confidence)}</p>
         </div>
 
-        {/* 🔥 IMAGE HEATMAP */}
-        {heatmap && type === 'image' && (
-          <div className="mt-8 pt-8 border-t border-white/10 text-center">
-
-            <h4 className="text-lg font-semibold text-white mb-4">
-              AI Attention Heatmap
-            </h4>
-
-            <img
-              src={`data:image/jpeg;base64,${heatmap}`}
-              className="mx-auto rounded-xl border border-white/10 max-w-full"
-            />
-
-          </div>
-        )}
-
-        {/* 📊 VIDEO CHART */}
-        {type === 'video' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="mt-8 pt-8 border-t border-white/10"
-          >
-            <div className="flex items-center gap-2 mb-6">
-              <ActivityIcon className="w-5 h-5 text-cyan-400" />
-              <h4 className="text-lg text-white">
-                Temporal Analysis
-              </h4>
-            </div>
-
-            <div className="h-64 w-full bg-slate-900/30 rounded-xl p-4 border border-white/5">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={mockChartData}>
-                  <Area
-                    type="monotone"
-                    dataKey="fakeProbability"
-                    stroke="#f87171"
-                    fill="#f87171"
-                    fillOpacity={0.3}
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          </motion.div>
-        )}
-
-        {/* 🔥 VIDEO HEATMAP FRAMES (MAIN FEATURE) */}
-        {type === 'video' && frames && frames.length > 0 && (
-          <div className="mt-8 pt-8 border-t border-white/10">
-
-            <h4 className="text-lg text-white mb-4">
-              Key Suspicious Frames
-            </h4>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-
-              {frames.map((f, i) => (
-                <div
-                  key={i}
-                  className="rounded-xl overflow-hidden border border-white/10"
-                >
-                  <img
-                    src={`data:image/jpeg;base64,${f.heatmap}`}
-                    className="w-full"
-                  />
-
-                  <div className="text-xs text-center text-slate-400 py-1">
-                    {(f.score * 100).toFixed(1)}% suspicious
-                  </div>
-                </div>
-              ))}
-
-            </div>
-
-          </div>
-        )}
-
       </div>
+
+      <ConfidenceBar score={confidence} />
+
+      {/* IMAGE HEATMAP */}
+      {heatmap && type === 'image' && (
+        <img
+          src={`data:image/jpeg;base64,${heatmap}`}
+          className="mt-4 rounded"
+        />
+      )}
+
+      {/* VIDEO FRAMES */}
+      {type === 'video' && frames && (
+        <div className="grid grid-cols-2 gap-4 mt-4">
+
+          {frames.map((f, i) => (
+            <div key={i}>
+              <img src={`data:image/jpeg;base64,${f.heatmap}`} />
+              <p>{(f.score * 100).toFixed(1)}%</p>
+            </div>
+          ))}
+
+        </div>
+      )}
+
     </motion.div>
   );
 }

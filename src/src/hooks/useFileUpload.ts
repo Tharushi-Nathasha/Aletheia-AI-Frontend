@@ -16,9 +16,15 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
     (selectedFile: File) => {
       setError(null);
 
-      // Validate size
+      // FILE TYPE VALIDATION
+      if (!selectedFile.type.startsWith("image") && !selectedFile.type.startsWith("video")) {
+        setError("Invalid file type. Please upload an image or video.");
+        return;
+      }
+
+      // FILE SIZE VALIDATION
       if (selectedFile.size > maxSizeMB * 1024 * 1024) {
-        setError(`File size must be less than ${maxSizeMB}MB`);
+        setError(`File too large. Maximum allowed is ${maxSizeMB}MB.`);
         return;
       }
 
@@ -34,6 +40,7 @@ export function useFileUpload(options: UseFileUploadOptions = {}) {
   const reset = useCallback(() => {
     setFile(null);
     setError(null);
+
     if (previewUrl) {
       URL.revokeObjectURL(previewUrl);
       setPreviewUrl(null);
